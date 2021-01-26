@@ -1,0 +1,119 @@
+{
+  "name": "picat",
+  "description": "piCat is a desktop interface for BIDS converting",
+  "version": "1.0.0",
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "electron-load-balancer": "https://github.com/maltheism/electron-load-balancer.git",
+    "electron-log": "^4.3.1",
+    "python-shell": "^2.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1",
+    "socket.io-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^26.6.2",
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^5.3.0",
+    "electron": "^11.2.0",
+    "electron-builder": "^22.9.1",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-rebuild": "^2.3.4",
+    "eslint": "^7.18.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx": "^0.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "lint-staged": "^10.5.3",
+    "wait-on": "^5.2.1"
+  },
+  "scripts": {
+    "rebuild": "rebuild zeromq --runtime=electron --target=11.2.1",
+    "react-start": "BROWSER=NONE react-scripts start",
+    "electron-start": "DEV=1 electron .",
+    "start": "concurrently 'npm run react-start' 'wait-on http://localhost:3000/ && npm run electron-start'",
+    "react-build": "react-scripts build",
+    "pack": "electron-builder --dir -c.extraMetadata.main=build/electron.js",
+    "electron-build-linux": "electron-builder --linux -c.extraMetadata.main=build/electron.js",
+    "electron-build-windows": "electron-builder --win -c.extraMetadata.main=build/electron.js",
+    "electron-build-mac": "electron-builder --mac -c.extraMetadata.main=build/electron.js",
+    "build-linux": "npm run react-build && npm run electron-build-linux",
+    "build-windows": "npm run react-build && npm run electron-build-windows",
+    "build-mac": "npm run react-build && npm run electron-build-mac",
+    "build": "npm run react-build && npm run electron-build-linux && npm run electron-build-windows & npm run electron-build-mac",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,md}": [
+      "eslint --fix src",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "author": {
+    "name": "Alizée Wickenheiser",
+    "email": "alizee.wickenheiser@mcgill.ca",
+    "url": "https://github.com/maltheism"
+  },
+  "build": {
+    "appId": "piCat",
+    "productName": "piCat",
+    "copyright": "Open Source",
+    "asar": false,
+    "linux": {
+      "target": [
+        "deb",
+        "snap"
+      ],
+      "category": "Utility"
+    },
+    "snap": {
+      "confinement": "classic"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "legalTrademarks": "Open Source",
+      "signingHashAlgorithms": [
+        "sha1",
+        "sha256"
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.medical",
+      "target": [
+        "default"
+      ]
+    },
+    "nsis": {
+      "oneClick": true
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "utils/**/*",
+      "scripts/**/*",
+      "background_tasks/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extends": "zeromq"
+  }
+}
