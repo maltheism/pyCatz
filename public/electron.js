@@ -1,8 +1,6 @@
 const electron = require('electron');
 const path = require('path');
 const url = require('url');
-const {ipcMain} = require('electron');
-const loadBalancer = require('electron-load-balancer');
 
 const {app} = electron;
 const {BrowserWindow} = electron;
@@ -59,7 +57,6 @@ function createWindow() {
   // process.env.DEV && mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function() {
-    loadBalancer.stopAll();
     mainWindow = null;
   });
 }
@@ -76,22 +73,4 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
-});
-
-/* ---------- Custom code starts here ------------ */
-
-// 1. Register background tasks (the keys will be used for reference later)
-loadBalancer.register(ipcMain, {
-  preemptive_loop: '/background_tasks/preemptive_loop.html',
-  fire_once: '/background_tasks/fire_once.html',
-},
-{debug: false},
-);
-
-// 2. Set up event listeners to bounce message from background to UI
-ipcMain.on('PREEMPTIVE_LOOP_RESULT', (event, args) => {
-  mainWindow.webContents.send('PREEMPTIVE_LOOP_RESULT', args);
-});
-ipcMain.on('FIRE_ONCE_RESULT', (event, args) => {
-  mainWindow.webContents.send('FIRE_ONCE_RESULT', args);
 });

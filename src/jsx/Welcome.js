@@ -1,5 +1,12 @@
 import React, {useContext, useState} from 'react';
+
+// Socket.io
 import {Event, SocketContext} from './socket.io';
+
+// Electron imports
+const electron = window.require('electron');
+
+// Components
 import FileInput from './elements/inputs';
 
 /**
@@ -13,7 +20,7 @@ const Welcome = (props) => {
   const [edfFile, setEdfFile] = useState({});
   const [bidsDirectory, setBidsDirectory] = useState('');
 
-  const {dialog} = props.electron.remote;
+  const {dialog} = electron.remote;
 
   const fire = () => {
     socketContext.emit('ieeg_to_bids', {
@@ -57,7 +64,7 @@ const Welcome = (props) => {
         />
         <input id='bidsDirectory'
           name='bidsDirectory'
-          value='Select BIDS output directory'
+          value='Choose BIDS output directory'
           type='button'
           onClick={() => onUserInput('bidsDirectory', null)}
         />
