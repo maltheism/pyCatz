@@ -1,10 +1,10 @@
-import EDF
+from scripts.libs import EDF
 import argparse
 import os
 import logging
 import sys
 import mne
-from mne_bids import write_raw_bids, BIDSPath, read_raw_bids
+from mne_bids import write_raw_bids, BIDSPath
 
 
 def validate(path):

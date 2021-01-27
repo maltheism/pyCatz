@@ -1,5 +1,6 @@
 import eventlet
 import socketio
+from scripts.libs import iEEG
 
 
 sio = socketio.Server(cors_allowed_origins=[])
@@ -14,6 +15,14 @@ def connect(sid, environ):
 @sio.event
 def my_message(sid, data):
     print('message ', data)
+    sio.emit('response', 'hello you!')
+
+
+@sio.event
+def ieeg_to_bids(sid, data):
+    print('message ', data)
+    iEEG.Converter(data)
+    sio.emit('response', 'success')
 
 
 @sio.event

@@ -5,3 +5,5 @@ logs/*.log
 VERSION
 venv/
 example
+__pycache__/
+libs/__pycache__/

@@ -37,7 +37,9 @@ const App = () => {
 
   return (
     <Socket uri={uri} options={options}>
-      <Welcome/>
+      <Welcome
+        electron={electron}
+      />
     </Socket>
   );
 };

@@ -6,7 +6,7 @@ import subprocess
 
 
 if __name__ == '__main__':
-    fname = os.path.dirname(os.path.realpath(__file__)) + "/example.gz"
+    fname = os.path.dirname(os.path.realpath(__file__)) + "/example/example.gz"
 
     raw = mne.io.read_raw_fif(fname)
 
