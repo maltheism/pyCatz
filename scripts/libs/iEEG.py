@@ -63,5 +63,5 @@ class Converter:
 class Modifier:
     def __init__(self, data):
         print('- Modifier: init started.')
-        print(data)
+        # print(data)
         TSV.Writer(data)

@@ -7,7 +7,7 @@ import {Event, SocketContext} from './socket.io';
 const electron = window.require('electron');
 
 // Components
-import FileInput from './elements/inputs';
+import {FileInput, TextInput} from './elements/inputs';
 
 /**
  * Welcome - the welcome component.
@@ -18,7 +18,8 @@ const Welcome = (props) => {
   const socketContext = useContext(SocketContext);
 
   const [edfFile, setEdfFile] = useState({});
-  const [bidsDirectory, setBidsDirectory] = useState('No directory chosen');
+  const [bidsDirectory, setBidsDirectory] = useState(null);
+  const [siteID, setSiteID] = useState('');
 
   const {dialog} = electron.remote;
 
@@ -33,9 +34,8 @@ const Welcome = (props) => {
 
   const fireModifyBidsTsv = () => {
     socketContext.emit('modify_bids_tsv', {
-      file_path: edfFile.path,
       bids_directory: bidsDirectory,
-      read_only: false,
+      site_id: siteID,
     });
     // socketContext.emit('my_message', 'hello');
   };
@@ -45,19 +45,15 @@ const Welcome = (props) => {
   };
 
   const onUserInput = async (name, value) => {
-    console.log(name);
-    console.log(value);
     if (name === 'edfFile') {
-      setEdfFile(value);
-      console.log(edfFile);
+      await setEdfFile(value);
     } else if (name === 'bidsDirectory') {
-      console.log('yay');
       const path = await dialog.showOpenDialog({
         properties: ['openDirectory'],
       });
-      // console.log(path.filePaths[0]);
       await setBidsDirectory(path.filePaths[0]);
-      console.log(bidsDirectory);
+    } else if (name === 'siteID') {
+      await setSiteID(value);
     }
   };
 
@@ -96,7 +92,7 @@ const Welcome = (props) => {
             onClick={() => onUserInput('bidsDirectory', null)}
           />
           <a style={{fontSize: '14px', cursor: 'default'}}>
-            {bidsDirectory}
+            {bidsDirectory ?? 'No directory chosen'}
           </a>
         </div>
         <div style={{
@@ -123,8 +119,14 @@ const Welcome = (props) => {
         padding: '20px',
         cursor: 'default',
       }}>
-        <b>4. The SiteID from LORIS:</b>
-        <input type={'text'}/>
+        {/*<b>4. The SiteID from LORIS:</b>*/}
+        {/*<input type={'text'} onChange={() => onUserInput('')}/>*/}
+        <TextInput id='siteID'
+          name='siteID'
+          label='4. The SiteID from LORIS: '
+          value={siteID}
+          onUserInput={onUserInput}
+        />
       </div>
       <div style={{
         padding: '20px',
