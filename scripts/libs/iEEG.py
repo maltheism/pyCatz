@@ -1,14 +1,16 @@
 import os
 import mne
 from scripts.libs import EDF
+from scripts.libs import TSV
 from mne_bids import write_raw_bids, BIDSPath
 
 
 class Converter:
-    # file_path: whee file located. bids_directory: where to output.
+    # data: {
+    #  file_path: '', // whee file located.
+    #  bids_directory: '', // where to output.
+    #  read_only: true/false // read without write or write.
     def __init__(self, data):
-        print(type(data))
-        print(data['file_path'])
         # json_object = json.loads(data)  # file_path, bids_directory, read_only
         print('- Converter: init started.')
         self.to_bids(
@@ -39,8 +41,27 @@ class Converter:
             raw.set_channel_types({ch: ch_type for ch in raw.ch_names})
             bids_root = bids_directory
             subject = m_info['subject_id'].replace('_', '').replace('-', '').replace(' ', '')
+            print('LOOK:')
+            print(subject)
+            # subject = 'alizee'  # can be modified will output sub-alizee
+            print('END~~~~~~~~~~~')
             bids_basename = BIDSPath(subject=subject, task=task, root=bids_root, acquisition="seeg")
             raw.info['line_freq'] = 60  # change when known.
+            raw.info['subject_info'] = {
+                'his_id': "test",
+                'birthday': (1993, 1, 26),
+                # 'sex': 1,
+                # 'hand': 2,
+                'SiteID': 'test'
+            }
+            raw.info['alizee'] = 'alizee was here'
             write_raw_bids(raw, bids_basename, overwrite=False)
         else:
             print('File not found or is not file: %s', file)
+
+
+class Modifier:
+    def __init__(self, data):
+        print('- Modifier: init started.')
+        print(data)
+        TSV.Writer(data)
