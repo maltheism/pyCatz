@@ -33,4 +33,5 @@ Inside project root using your terminal type:
 ```
 npm install
 npm run build
+# Visit the /dist for the platform builds.
 ```
