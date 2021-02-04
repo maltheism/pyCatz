@@ -5,7 +5,6 @@ import './App.css';
 import {Socket} from './jsx/socket.io';
 const uri = 'http://127.0.0.1:5000';
 const options = {
-  // transports: ['websocket', 'polling'],
   transports: ['websocket'],
 };
 
