@@ -8,6 +8,8 @@ pycat is a GUI interface for iEEG to BIDS conversion for LORIS (Longitudinal Onl
 
  * Linux, macOS, Windows
 
+## Development
+
 #### Development Requirements
 
  * Node.js >= 14.5.4
