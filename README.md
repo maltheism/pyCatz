@@ -14,3 +14,21 @@ pycat is a GUI interface for iEEG to BIDS conversion for LORIS (Longitudinal Onl
  * NPM >= 7.5.2
  * Python 3.8
  * PyInstaller 4.2
+
+#### Development Build guide
+
+Inside project root using your terminal type:
+```
+npm install
+npm run start
+# In another terminal inside project root type:
+python -m python.pycat
+```
+
+#### Building production app guide
+
+Inside project root using your terminal type:
+```
+npm install
+npm run build
+```
