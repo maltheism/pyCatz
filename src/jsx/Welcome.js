@@ -119,8 +119,6 @@ const Welcome = (props) => {
         padding: '20px',
         cursor: 'default',
       }}>
-        {/*<b>4. The SiteID from LORIS:</b>*/}
-        {/*<input type={'text'} onChange={() => onUserInput('')}/>*/}
         <TextInput id='siteID'
           name='siteID'
           label='4. The SiteID from LORIS: '

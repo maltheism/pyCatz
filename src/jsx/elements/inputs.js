@@ -11,10 +11,10 @@ export const FileInput = (props) => {
     <>
       <label htmlFor={props.id}><b>{props.label}</b></label>
       <input
+        type='file'
         id={props.id}
         name={props.name}
         accept={props.accept}
-        type='file'
         onChange={handleChange}
       />
     </>
@@ -38,12 +38,13 @@ export const TextInput = (props) => {
     <>
       <label htmlFor={props.id}><b>{props.label}</b></label>
       <input
+        type='text'
         id={props.id}
         name={props.name}
         accept={props.accept}
-        type='text'
         value={props.value}
         onChange={handleChange}
+        placeholder={props.placeholder}
       />
     </>
   );
@@ -54,6 +55,7 @@ TextInput.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   onUserInput: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 export default {
