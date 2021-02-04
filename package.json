@@ -3,18 +3,14 @@
   "description": "pycat is a desktop interface for conversion to BIDS",
   "version": "1.0.0",
   "dependencies": {
-    "@material-ui/core": "^4.11.2",
-    "@material-ui/icons": "^4.11.2",
     "electron-log": "^4.3.1",
     "prop-types": "^15.7.2",
-    "python-shell": "^2.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "^4.0.2",
     "socket.io-client": "^3.1.1"
   },
   "devDependencies": {
-    "@jest/globals": "^26.6.2",
     "babel-eslint": "^10.1.0",
     "concurrently": "^5.3.0",
     "electron": "^11.2.2",
@@ -68,7 +64,7 @@
   "author": {
     "name": "Alizée Wickenheiser",
     "email": "alizee.wickenheiser@mcgill.ca",
-    "url": "https://github.com/maltheism"
+    "url": "https://github.com/aces/pycat"
   },
   "build": {
     "appId": "pycat",
