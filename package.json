@@ -108,7 +108,7 @@
       "build/**/*",
       "node_modules/**/*",
       "utils/**/*",
-      "scripts/**/*"
+      "python/**/*"
     ],
     "directories": {
       "buildResources": "assets"

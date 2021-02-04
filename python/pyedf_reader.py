@@ -1,4 +1,4 @@
-from scripts.libs import EDF
+from python.libs import EDF
 import argparse
 import os
 import logging

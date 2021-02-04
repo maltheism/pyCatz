@@ -1,6 +1,6 @@
 import eventlet
 import socketio
-from scripts.libs import iEEG
+from python.libs import iEEG
 
 
 sio = socketio.Server(cors_allowed_origins=[])

@@ -1,7 +1,7 @@
 import os
 import mne
-from scripts.libs import EDF
-from scripts.libs import TSV
+from python.libs import EDF
+from python.libs import TSV
 from mne_bids import write_raw_bids, BIDSPath
 
 
