@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Electron imports
+const electron = window.require('electron');
+
 export const FileInput = (props) => {
   const handleChange = (event) => {
     // Send current file to parent component
@@ -58,7 +61,39 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 };
 
+export const DirectoryInput = (props) => {
+  const {dialog} = electron.remote;
+
+  const handleClick = async () => {
+    // Send directory to parent component
+    const path = await dialog.showOpenDialog({
+      properties: ['openDirectory'],
+    });
+    props.onUserInput(props.id, path.filePaths[0]);
+  };
+  return (
+    <>
+      <label htmlFor={props.id}><b>{props.label}</b></label>
+      <input
+        type='button'
+        id={props.id}
+        name={props.name}
+        value={props.value}
+        onClick={handleClick}
+      />
+    </>
+  );
+};
+DirectoryInput.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onUserInput: PropTypes.func,
+};
+
 export default {
   FileInput,
   TextInput,
+  DirectoryInput,
 };

@@ -3,11 +3,8 @@ import React, {useContext, useState} from 'react';
 // Socket.io
 import {Event, SocketContext} from './socket.io';
 
-// Electron imports
-const electron = window.require('electron');
-
 // Components
-import {FileInput, TextInput} from './elements/inputs';
+import {DirectoryInput, FileInput, TextInput} from './elements/inputs';
 
 /**
  * Welcome - the welcome component.
@@ -21,7 +18,7 @@ const Welcome = (props) => {
   const [bidsDirectory, setBidsDirectory] = useState(null);
   const [siteID, setSiteID] = useState('');
 
-  const {dialog} = electron.remote;
+  // const {dialog} = electron.remote;
 
   const fireBidsConverter = () => {
     socketContext.emit('ieeg_to_bids', {
@@ -46,10 +43,7 @@ const Welcome = (props) => {
     if (name === 'edfFile') {
       await setEdfFile(value);
     } else if (name === 'bidsDirectory') {
-      const path = await dialog.showOpenDialog({
-        properties: ['openDirectory'],
-      });
-      await setBidsDirectory(path.filePaths[0]);
+      await setBidsDirectory(value);
     } else if (name === 'siteID') {
       await setSiteID(value);
     }
@@ -80,14 +74,11 @@ const Welcome = (props) => {
         <div style={{
           padding: '20px',
         }}>
-          <b style={{cursor: 'default'}}>
-            2. The BIDS output directory:
-          </b>
-          <input id='bidsDirectory'
+          <DirectoryInput id='bidsDirectory'
             name='bidsDirectory'
             value='Choose directory'
-            type='button'
-            onClick={() => onUserInput('bidsDirectory', null)}
+            label='2. The BIDS output directory: '
+            onUserInput={onUserInput}
           />
           <a style={{fontSize: '14px', cursor: 'default'}}>
             {bidsDirectory ?? 'No directory chosen'}
