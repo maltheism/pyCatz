@@ -12,8 +12,10 @@ import {DirectoryInput, FileInput, TextInput} from './elements/inputs';
  * @return {JSX.Element}
  */
 const Welcome = (props) => {
+  // React Context
   const socketContext = useContext(SocketContext);
 
+  // React State
   const [edfFile, setEdfFile] = useState({});
   const [bidsDirectory, setBidsDirectory] = useState(null);
   const [siteID, setSiteID] = useState('');
