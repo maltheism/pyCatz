@@ -1,6 +1,6 @@
-# pycat - iEEG to BIDS Converter Wizard
+# pyCat - iEEG to BIDS Converter Wizard
 
-pycat is a GUI interface for iEEG to BIDS conversion for LORIS (Longitudinal Online Research and Imaging System).
+pyCat is a GUI interface for iEEG to BIDS conversion for LORIS (Longitudinal Online Research and Imaging System).
 
 ## Installation
 
