@@ -29,7 +29,6 @@ const Welcome = (props) => {
       bids_directory: bidsDirectory,
       read_only: false,
     });
-    // socketContext.emit('my_message', 'hello');
   };
 
   const fireModifyBidsTsv = () => {
@@ -37,7 +36,6 @@ const Welcome = (props) => {
       bids_directory: bidsDirectory,
       site_id: siteID,
     });
-    // socketContext.emit('my_message', 'hello');
   };
 
   const onMessage = (message) => {
