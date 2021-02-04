@@ -18,8 +18,6 @@ const Welcome = (props) => {
   const [bidsDirectory, setBidsDirectory] = useState(null);
   const [siteID, setSiteID] = useState('');
 
-  // const {dialog} = electron.remote;
-
   const fireBidsConverter = () => {
     socketContext.emit('ieeg_to_bids', {
       file_path: edfFile.path,
