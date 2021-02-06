@@ -1,8 +1,9 @@
 .DS_Store
 .idea/
-.spec
+*.spec
 logs/*.log
 VERSION
 venv/
 __pycache__/
 libs/__pycache__/
+pycat.spec
